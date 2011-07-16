@@ -1,0 +1,52 @@
+# Workspace scripts
+# use `ws` to cd into the workspace
+# use `ws project-name` to cd into the directory of a project. autocomplete works.
+
+# Main active workspace
+_ws()
+{
+	local cur
+	COMPREPLY=()
+	cur="${COMP_WORDS[COMP_CWORD]}"
+	local things=$(for t in `ls /Users/stefanfoulis/Coding/Projects/`; do echo ${t}; done)
+	COMPREPLY=($(compgen -W "${things}" $cur))
+}
+
+ws()
+{
+	cd /Users/stefanfoulis/Coding/Projects/$1
+}
+complete -F _ws ws
+
+# Legacy workspace
+_wsleg()
+{
+	local cur
+	COMPREPLY=()
+	cur="${COMP_WORDS[COMP_CWORD]}"
+	local things=$(for t in `ls /Users/stefanfoulis/Coding/LegacyProjects/`; do echo ${t}; done)
+	COMPREPLY=($(compgen -W "${things}" $cur))
+}
+
+wsleg()
+{
+	cd /Users/stefanfoulis/Coding/LegacyProjects/$1
+}
+complete -F _wsleg wsleg
+
+
+# gists
+_gists()
+{
+	local cur
+	COMPREPLY=()
+	cur="${COMP_WORDS[COMP_CWORD]}"
+	local things=$(for t in `ls /Users/stefanfoulis/Coding/Gists/`; do echo ${t}; done)
+	COMPREPLY=($(compgen -W "${things}" $cur))
+}
+
+gists()
+{
+	cd /Users/stefanfoulis/Coding/Gists/$1
+}
+complete -F _gists gists
